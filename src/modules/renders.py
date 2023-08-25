@@ -2,6 +2,18 @@ from matplotlib import pyplot as plt
 
 import seaborn as sns
 
+def render_simple(obj_country, obj_name):
+    plt.bar(obj_country, obj_name)
+    plt.show()
+
+def render_violin(obj, obj_x, obj_y, full_name):
+    fig = plt.subplots(figsize=(15, 10)) 
+
+    sns.violinplot(data = obj, x = obj_x, y = obj_y)
+
+    plt.savefig(full_name + ".png")
+    plt.show()
+
 def render_bar(obj, type,  name):
     f, ax = plt.subplots(figsize=(10, 15))
     ax = sns.barplot(
