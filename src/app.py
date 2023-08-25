@@ -4,6 +4,8 @@ import seaborn as sns
 import pandas as pd
 import os
 
+from modules.settings import rename_column
+
 from modules.renders import render_simple
 from modules.renders import render_violin
 from modules.renders import render_bar
@@ -14,9 +16,8 @@ from modules.renders import render_line
 file_path = os.getcwd() + "/src/database/data.csv"
 df = pd.read_csv(file_path)
 
-# Doing a slight rename for one of the columns. It has a very long time which is good for labeling, but not so nice for using in a plot. After that, the renaming check is performed.
-df.rename(columns = { "Life expectancy at birth (years)" : "LEABY" }, inplace = True)
-df.head()
+# Doing a slight rename for one of the columns.
+rename_column(df)
 
 # Bar Charts To Compare Average
 
