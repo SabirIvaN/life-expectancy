@@ -4,12 +4,16 @@ import seaborn as sns
 import pandas as pd
 import os
 
+from modules.renders import render_bar
+from modules.renders import render_scatter
+from modules.renders import render_line
+
 # Read in the data
 file_path = os.getcwd() + "/src/database/data.csv"
 df = pd.read_csv(file_path)
 
 # Doing a slight rename for one of the columns. It has a very long time which is good for labeling, but not so nice for using in a plot. After that, the renaming check is performed.
-df.rename(columns= {"Life expectancy at birth (years)" : "LEABY"}, inplace= True)
+df.rename(columns = { "Life expectancy at birth (years)" : "LEABY" }, inplace = True)
 df.head()
 
 # Bar Charts To Compare Average
@@ -29,50 +33,17 @@ plt.show()
 
 # Bar Plots Of GDP and Life Expectancy over time
 
-f, ax = plt.subplots(figsize=(10, 15))
-ax = sns.barplot(
-    x = df.Country,
-    y = df.GDP,
-    hue = df.Year, 
-    data = df
-)
-
-plt.xticks(rotation= 90)
-plt.ylabel("GDP in Trillions of U.S. Dollars")
-plt.show()
-
-f, ax = plt.subplots(figsize=(10, 15)) 
-ax = sns.barplot(
-    x = df.Country,
-    y = df.LEABY,
-    hue = df.Year, 
-    data = df
-)
-
-plt.xticks(rotation= 90)
-plt.ylabel("Life expectancy at birth in years")
-plt.savefig("Life expectancy at birth in years")
-plt.show()
+render_bar(df, df.GDP, "GDP in Trillions of U.S. Dollars")
+render_bar(df, df.LEABY, "Life expectancy at birth in years")
 
 # Scatter Plots of GDP and Life Expectancy Data
 
-g = sns.FacetGrid(df, col="Country", hue="Year", col_wrap=4, height=2)
-g = (g.map(plt.scatter, "GDP", "LEABY", edgecolor="w").add_legend())
-
-plt.savefig("GDP vs LEABY.png")
-plt.show()
+render_scatter(df, 4, 2, "GDP", "LEABY", "w", "GDP vs LEABY")
 
 # Line Plots for Life Expectancy
 
-g3 = sns.FacetGrid(df, col="Country", col_wrap=3, height=4)
-g3 = (g3.map(plt.scatter, "Year", "LEABY").add_legend())
-plt.savefig("LEABY Comparision.png")
-plt.show()
+render_line(df, "LEABY", "LEABY Comparision")
 
 # Line Plots for GDP
 
-g4 = sns.FacetGrid(df, col="Country", col_wrap=3, height=4)
-g4 = (g4.map(plt.scatter, "Year", "GDP").add_legend())
-plt.savefig("GDP comparision.png")
-plt.show()
-
+render_line(df, "GDP", "GDP comparision")
