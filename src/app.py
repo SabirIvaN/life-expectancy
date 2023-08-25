@@ -6,11 +6,11 @@ import os
 
 from modules.settings import rename_column
 
+from modules.renders import render_scatter
 from modules.renders import render_simple
 from modules.renders import render_violin
-from modules.renders import render_bar
-from modules.renders import render_scatter
 from modules.renders import render_line
+from modules.renders import render_bar
 
 # Read in the data
 file_path = os.getcwd() + "/src/database/data.csv"
