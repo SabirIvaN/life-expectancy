@@ -10,7 +10,7 @@ from modules.renders import render_violin # Import from the renderer module of t
 from modules.renders import render_bar # Import from the renderer module of the bar chart drawing function
 
 # Read in the data
-file_path = os.getcwd() + "/src/database/data.csv"
+file_path = os.getcwd() + "/src/database/dataset.csv"
 df = pd.read_csv(file_path)
 
 # Doing a slight rename for one of the columns
@@ -22,13 +22,13 @@ rename_column(df)
 render_simple(df.Country, df.GDP)
 
 # Violin Plots To Compare Life Expectancy Distributions
-render_violin(df, df.Country, df.LEABY, "Violinplot")
+render_violin(df, df.Country, df.LEABY, "Violin Plot")
 
 # Bar Plots Of GDP and Life Expectancy over time
 render_bar(df, df.GDP, "GDP in Trillions of U.S. Dollars")
-render_bar(df, df.LEABY, "Life expectancy at birth in years")
+render_bar(df, df.LEABY, "Life Expectancy at birth in years")
 
 # Scatter Plots of GDP and Life Expectancy Data, Line Plots for Life and Plots Expectancy and Line Plots for GDP
 render_scatter(df, 4, 2, "GDP", "GDP vs LEABY", "LEABY", "w")
 render_scatter(df, 3, 4, "LEABY", "LEABY Comparision")
-render_scatter(df, 3, 4, "GDP", "GDP comparision")
+render_scatter(df, 3, 4, "GDP", "GDP Comparision")
